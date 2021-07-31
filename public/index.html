@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bagh Chal. Tiger Moves</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+  <div id="test">
+    <div id="game-board">
+      <div id="movements">
+      <div id="0" class="default"></div>
+      <div id="1" class="default"></div>
+      <div id="2" class="default"></div>
+      <div id="3" class="default"></div>
+      <div id="4" class="default"></div>
+
+      <div id="5" class="default"></div>
+      <div id="6" class="default"></div>
+      <div id="7" class="default"></div>
+      <div id="8" class="default"></div>
+      <div id="9" class="default"></div>
+
+      <div id="10" class="default"></div>
+      <div id="11" class="default"></div>
+      <div id="12" class="default"></div>
+      <div id="13" class="default"></div>
+      <div id="14" class="default"></div>
+
+      <div id="15" class="default"></div>
+      <div id="16" class="default"></div>
+      <div id="17" class="default"></div>
+      <div id="18" class="default"></div>
+      <div id="19" class="default"></div>
+
+      <div id="20" class="default"></div>
+      <div id="21" class="default"></div>
+      <div id="22" class="default"></div>
+      <div id="23" class="default"></div>
+      <div id="24" class="default"></div>
+      </div>
+    </div>
+
+    <div class="card text-center border-secondary mb-3" style="width: 18rem";>
+      <div class="card-header">
+          Turn Indicator
+      </div>
+      <ul class="list-group list-group-flush">
+          <li id="tiger-turn" class="list-group-item">TIGER</li>
+          <li id="goat-turn" class="list-group-item">GOAT</li>
+      </ul>
+      <div class="card-body text-primary">
+          <h5 class="card-title">Message</h5>
+          <p id="message" class="card-text">This is where messahe will be displayed</p>
+      </div>
+
+      
+          <h5 class="card-title">Score:</h5>
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                  </tr>
+              </thead>
+              <tbody>
+              <tr>
+                  <th scope="row">Goat's remaining</th>
+                  <td id="goats-remaining"></td>
+              </tr>
+              <tr>
+                  <th scope="row">Goat's killed</th>
+                  <td id="goats-captured"></td>
+              </tr>
+              <tr>
+                  <th scope="row">Tiger's trapped</th>
+                  <td id="tigers-trapped"></td>
+              </tr>
+              </tbody>
+          </table>
+    </div>
+
+
+</body>
