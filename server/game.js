@@ -103,9 +103,4 @@ module.exports = {
   goatPlaced, 
   getMoves, 
   getTurn,
-  turn, 
-  goatsPlaced, 
-  totalGoats, 
-  goatsCaptured, 
-  tigersTrapped 
 }
