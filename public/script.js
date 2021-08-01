@@ -1,10 +1,12 @@
-
+let gameId;
 let tmp = {};
-let currentMove = {from: '', to: ''};
+let currentMove = {from: '', to: '', gameId};
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const socket = io();
+  const socket = io({autoConnect: false});
+
+  onStart();
 
   socket.on('player has joined', (data) => {
     document.getElementById('message').innerHTML = `${data.player} has joined`;
@@ -22,6 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   socket.on('goats turn', findPieces);
 
+  function onStart () {
+    gameId = document.getElementById('game-id').value;
+    document.getElementById('sng').addEventListener('click', () => {
+      socket.connect();
+      socket.emit('join this game', {gameId: gameId});
+    });
+    //place vent handler on button to initiate socket connection
+  }
+
   function placeGoat (board) {
     for (let space of board.emptySpaces) {
       const element = document.getElementById(`${space}`);
@@ -32,7 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function goatPlaced (event) {
     removeListeners('highlight', goatPlaced);
-    socket.emit('goat placed', {index: event.target.id});
+    socket.emit('goat placed', {index: event.target.id,
+      gameId: gameId
+    });
   }
 
   function findPieces (board) {
@@ -87,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     currentMove.to = event.target.id;
     currentMove.capture = false;
+    currentMove.gameId = gameId;
     socket.emit('move piece', currentMove);
 
     currentMove = {};
@@ -100,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     currentMove.to = event.target.id;
     currentMove.capture = true;
+    currentMove.gameId = gameId;
     socket.emit('move piece', currentMove);
 
     currentMove = {};
@@ -122,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateBoard (board) {
+    console.log(board);
     const all = document.querySelectorAll('.default');
     all.forEach( (el) => {
       el.innerHTML = '';

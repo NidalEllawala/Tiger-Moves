@@ -1,5 +1,6 @@
 
 
+
 ///////// GAME STATE VARIABLES /////////
 let { board } = require('./board');
 let turn = 1;

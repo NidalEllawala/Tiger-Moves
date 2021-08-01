@@ -1,14 +1,22 @@
+body {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 #game-board {
   background-image: url('board.jpg');
   background-size: cover;
   height: 500px;
   width: 500px; 
-}
-
-body {
-  text-align: center;
 }
 
 #movements {
@@ -48,3 +56,17 @@ body {
 }
 
 
+
+#panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #202020;
+}
+
+.start-menu {
+  color: red;
+  font-family: sans-serif;
+}
