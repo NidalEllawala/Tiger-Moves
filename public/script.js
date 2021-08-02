@@ -26,9 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function onStart () {
     gameId = document.getElementById('game-id').value;
+    player = document.getElementById('player').value;
     document.getElementById('sng').addEventListener('click', () => {
+      console.log(player);
       socket.connect();
-      socket.emit('join this game', {gameId: gameId});
+      socket.emit('join this game', {gameId: gameId, player: player});
     });
     //place vent handler on button to initiate socket connection
   }
@@ -47,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gameId: gameId
     });
   }
+
 
   function findPieces (board) {
     if (tmp.possibleMoves == undefined) {

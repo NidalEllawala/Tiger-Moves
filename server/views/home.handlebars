@@ -1,24 +1,38 @@
+
 <body>
   <div id="main">
     {{#if uid}}
     <div id="panel">
-      <p class="start-menu">your game id is:</p>
-      <p class="start-menu">{{ uid }}</p>
-      <p class="start-menu">Cick the link below and use the id to start playing</p>
-      <a href="http://localhost:3000/playgame/{{ uid }}" <button type="button" className="start-menu">Play Bagh Chal</button></a>
+      <p class="text">Game ID:</p>
+      <button type="button" class="button is-fullwidth panel-item">{{ uid }}</button>
+      <p class="text">Your opponent can use this ID to join the game</p>
+      <a href="http://localhost:3000/playgame/{{ uid }}/{{ choice }}" <button type="button" class="button is-fullwidth panel-item">Play Bagh Chal</button></a>
     </div>
     {{else if join}}
     <div id="panel">
       <form action="http://localhost:3000/joingame" method="POST">
-        <label class="start-menu" for="id">Enter your game id below:</label>
-        <input type="number" id="id" name="id"><br><br>
-        <button type="submit" class="start-menu">Play Bagh Chal</button>
+        <label class="text" for="id">Enter your game id below:</label>
+        <input class="input" type="text" id="id" name="id"><br><br>
+        <button type="submit" class="button is-fullwidth panel-item">Play Bagh Chal</button>
       </form>
     {{else}}
     <div id="panel">
-      <a href="http://localhost:3000/getnewid"> <button type="button" class="start-menu">Start New Game</button> </a>
-      <a href="http://localhost:3000/join"> <button type="button" class="start-menu">Join Existing Game</button> </a>
-    </div>
+      <form action="http://localhost:3000/getnewid" method="POST">
+        <p class="text">Play as:</p>
+        <label class="radio text" for="tiger">
+        <input type="radio" id="tiger" name="choose-player" value="tiger" checked>
+        Tiger
+        </label>
+        <label class="radio text" for="goat">
+        <input type="radio" id="goat" name="choose-player" value="goat">
+        Goat
+      </label>
+      <a> <button type="submit" class="button is-fullwidth panel-item">Start New Game</button> </a>
+      </form>
+        <p class="text">OR</p>
+      <div>
+      <a href="http://localhost:3000/join"> <button type="button" class="button is-fullwidth panel-item">Join Existing Game</button> </a>
+      </div>
   </div>
   {{/if}}
 </body>`

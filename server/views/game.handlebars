@@ -1,6 +1,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/script.js"></script>
 
+
 <div id="test">
     <div id="game-board">
       <div id="movements">
@@ -36,42 +37,37 @@
       </div>
     </div>
 
-    <div class="card text-center border-secondary mb-3" style="width: 18rem";>
-      <div class="card-header">
-          Turn Indicator
-      </div>
-      <ul class="list-group list-group-flush">
-          <li id="tiger-turn" class="list-group-item">TIGER</li>
-          <li id="goat-turn" class="list-group-item">GOAT</li>
-      </ul>
-      <div class="card-body text-primary">
-          <h5 class="card-title">Message</h5>
-          <p id="message" class="card-text">This is where message will be displayed</p>
-      </div>
+    <div id="info-panel"> 
+      <div class="box">
+        
+        <button type="button" id="tiger-turn" class="button is-fullwidth is-medium" >TIGER</button>
+        <button type="button" id="goat-turn" class="button is-fullwidth is-medium" >GOAT</button>
+        
+        <div id="message" class="box">
+          <p>You have joined the game</p>
+        </div>
 
-          <table class="table">
-              <thead>
-                  <tr>
-                      <th scope="col"></th>
-                      <th scope="col"></th>
-                  </tr>
-              </thead>
-              <tbody>
-              <tr>
-                  <th scope="row">Goat's remaining</th>
-                  <td id="goats-remaining"></td>
-              </tr>
-              <tr>
-                  <th scope="row">Goat's killed</th>
-                  <td id="goats-captured"></td>
-              </tr>
-              <tr>
-                  <th scope="row">Tiger's trapped</th>
-                  <td id="tigers-trapped"></td>
-              </tr>
-              </tbody>
-          </table>
-          <input type="hidden" id="game-id" value="{{gameId}}"><br><br>
-          <a href="#" id="sng" class="btn btn-primary">Start New Game</a>
+        <table class="table is-striped">
+          <tr>
+            <th>Goat's Remaining</th>
+            <td id="goats-remaining"></td>
+          </tr>
+          <tr>
+            <th>Goat's Killed</th>
+            <td id="goats-captured"></td>
+          </tr>
+          <tr>
+            <th>Tigers Trapped</th>
+            <td id="tigers-trapped"></td>
+          </tr>
+        </table>
 
+        <input type="hidden" id="game-id" value="{{gameId}}">
+        <input type="hidden" id="player" value="{{player}}">
+        <a href="#" id="sng" class="button is-primary is-fullwidth">Start Playing</a>
+
+      </div>
     </div>
+
+</div>
+

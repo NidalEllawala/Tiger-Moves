@@ -1,6 +1,4 @@
-const Handlebars = require("handlebars");
-const { storage } = require('../db');
-const { createNewGame } = require('../db');
+const { createNewGame, getGame } = require('../db');
 
 
 function home (req, res) {
@@ -8,9 +6,15 @@ function home (req, res) {
 }
 
 function newGame (req, res) {
-  const rndm = Math.floor(Math.random()*100000+1).toString();
-  createNewGame(rndm);
-  res.render('home', {uid: rndm});
+  try {
+    const choice = req.body['choose-player'];
+    const rndm = Math.floor(Math.random()*100000+1).toString();
+    createNewGame(rndm, choice);
+    res.render('home', {uid: rndm, choice: choice});
+  } catch (err) {
+    res.status(500);
+    res.send('Internal server error');
+  }
 }
 
 function join (req, res) {
@@ -18,12 +22,26 @@ function join (req, res) {
 }
 
 function playGame (req, res) {
-  const gameId = req.params.id;
-  res.render('game', {gameId: gameId});
+  try {
+    const gameId = req.params.id;
+    const choice = req.params.player;
+    res.render('game', {gameId: gameId, player: choice});
+  } catch (err) {
+    res.status(500);
+    res.send('Internal server error');
+  }
 }
 
 function joinGame (req, res) {
-  res.status(200).redirect(`/playgame/${req.body.id}`);
+  try {
+    const gameId = req.body.id;
+    const joining = getGame(gameId);
+    const player = (joining.isTaken === 'tiger' ? 'goat' : 'tiger');
+    res.status(200).redirect(`/playgame/${gameId}/${player}`);
+  } catch (error) {
+    res.status(500);
+    res.send('Internal server error');
+  }
 }
 
 module.exports = { joinGame, home, playGame, newGame, join };

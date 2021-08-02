@@ -1,15 +1,42 @@
+
+
 body {
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-image: url('tiger-delos.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #main {
+  height: inherit;
+  width: inherit;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#panel {
+  width: 30%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  padding: 2rem;
+  background-color: rgba(7,27,50,0.8);
+
+}
+
+.panel-item {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.text {
+  color: white;
+  font-size: 1.25rem;
+  margin: auto;
 }
 
 #game-board {
@@ -52,21 +79,19 @@ body {
 }
 
 #test {
+  height: inherit;
+  width: inherit;
+  background-color: rgba(7,27,50,0.5);
+
   display: flex;
-}
-
-
-
-#panel {
-  display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background-color: #202020;
 }
 
-.start-menu {
-  color: red;
-  font-family: sans-serif;
+#info-panel {
+  width: 30%;
 }
+
+
+
+

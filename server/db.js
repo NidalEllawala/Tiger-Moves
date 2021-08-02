@@ -1,12 +1,14 @@
 const { board } = require('./board');
 const storage = { games: {} };
 
-function createNewGame (id) {
+function createNewGame (id, player) {
   storage.games[id] = { 
     board: new board(),
-    players: []
+    playerCount: 0,
+    isTaken: player,
+    tiger: '',
+    goat: ''
   }
-  console.log(Object.keys(storage.games));
 }
 
 function gameExists (id) {
@@ -18,11 +20,12 @@ function gameExists (id) {
 }
 
 function playersInGame (id) {
-  return storage.games[id].players.length;
+  return storage.games[id].playerCount;
 }
 
-function addPlayer (id, socketId) {
-  storage.games[id].players.push(socketId);
+function addPlayer (id, player, socketId) {
+  storage.games[id][player] = socketId;
+  storage.games[id].playerCount += 1;
 }
 
 function getGame (id) {

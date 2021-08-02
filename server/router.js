@@ -12,12 +12,12 @@ const {
 
 router.get('/', home)
 
-router.get('/getnewid', newGame);
+router.post('/getnewid', newGame);
 
 router.get('/join', join);
 
 router.post('/joingame', joinGame);
 
-router.get('/playgame/:id', playGame);
+router.get('/playgame/:id/:player', playGame);
 
 module.exports = router;
