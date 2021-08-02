@@ -1,8 +1,8 @@
-
+const games = require('./index');
 
 
 ///////// GAME STATE VARIABLES /////////
-let { board } = require('./board');
+let { board } = require('../board');
 let turn = 1;
 const totalGoats = 3;
 const totalTigers = 4;
