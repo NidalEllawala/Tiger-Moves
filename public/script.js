@@ -1,4 +1,5 @@
 let gameId;
+let player;
 let tmp = {};
 let currentMove = {from: '', to: '', gameId};
 
@@ -12,6 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('message').innerHTML = `${data.player} has joined`;
   });
 
+  socket.on('waiting for other player', () => {
+    addMessage(player, 'waiting for other player to join');
+  });
+
+  socket.on('both players have joined', () => {
+    addMessage(player, 'Both players have joined! Time to start playing');
+    if (player === 'tiger') {
+      document.getElementById('goat-turn').classList.add('is-primary');
+    } else {
+      document.getElementById('tiger-turn').classList.add('is-primary');
+    }
+  });
+  
+
   socket.on('server full', () => {
     alert('server is full. socket connection rejected');
   });
@@ -24,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   socket.on('goats turn', findPieces);
 
+  socket.on('game over', gameOver);
+
   function onStart () {
     gameId = document.getElementById('game-id').value;
     player = document.getElementById('player').value;
@@ -32,10 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
       socket.connect();
       socket.emit('join this game', {gameId: gameId, player: player});
     });
-    //place vent handler on button to initiate socket connection
   }
 
+
   function placeGoat (board) {
+    changeTurnDisplay();
     for (let space of board.emptySpaces) {
       const element = document.getElementById(`${space}`);
       element.classList.add('highlight');
@@ -45,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function goatPlaced (event) {
     removeListeners('highlight', goatPlaced);
+    //changeTurnDisplay();
     socket.emit('goat placed', {index: event.target.id,
       gameId: gameId
     });
@@ -52,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   function findPieces (board) {
+    //changeTurnDisplay();
     if (tmp.possibleMoves == undefined) {
       tmp = board;
     }
@@ -100,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     removeListeners('move-piece', movePiece);
     removeListeners('capture', capturePiece);
     removeListeners('highlight', deselectPiece);
+    //changeTurnDisplay();
 
     currentMove.to = event.target.id;
     currentMove.capture = false;
@@ -114,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     removeListeners('move-piece', movePiece);
     removeListeners('capture', capturePiece);
     removeListeners('highlight', deselectPiece);
+    //changeTurnDisplay();
 
     currentMove.to = event.target.id;
     currentMove.capture = true;
@@ -154,6 +176,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('goats-remaining').innerHTML = board.score.goatsRemaining;
     document.getElementById('goats-captured').innerHTML = board.score.goatsCaptured;
     document.getElementById('tigers-trapped').innerHTML = board.score.tigersTrapped;
+  }
+
+  function gameOver (result) {
+    document.getElementById('message').innerHTML = `Game Over - ${result.winner} has won`;
+
+    //enable link to play another game
+  }
+
+  function changeTurnDisplay () {
+    document.getElementById('tiger-turn').classList.toggle('is-primary');
+    document.getElementById('goat-turn').classList.toggle('is-primary');
+  }
+
+  function addMessage (messageTo, message) {
+
+    if (player === messageTo) {
+      let p = document.createElement('p');
+      p.innerHTML = message;
+      document.getElementById('message').append(p);
+    }
   }
 });
 

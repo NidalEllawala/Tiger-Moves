@@ -11,6 +11,10 @@ class board {
         this.goatsPlaced = 0;
         this.goatsCaptured = 0;
         this.tigersTrapped = 0;
+        this.towinTiger = 2;
+        this.towinGoat = 4;
+        this.gameOver = false;
+        this.winner = '';
         this.board = 
         [
           {
@@ -182,9 +186,13 @@ class board {
           score: { 
             goatsRemaining: this.totalGoats - this.goatsPlaced,
             goatsCaptured: this.goatsCaptured,
-            tigersTrapped: this.tigersTrapped
+            tigersTrapped: this.tigersTrapped,
            } 
           };
+
+
+
+
       }
 
       emptySpaces () {
@@ -249,6 +257,18 @@ class board {
         } else {
           return 'tigers move';
         }
+      }
+
+      checkWinner () {
+        if (this.goatsCaptured === this.towinTiger || this.tigersTrapped === this.towinGoat) {
+          console.log('called line 264 board.js')
+          this.gameOver = true;
+          this.winner = (this.goatsCaptured === this.towinTiger) ? 'tiger' : 'goat'; 
+        }
+        return {
+          gameOver: this.gameOver, 
+          winner: this.winner
+        };
       }
 
 /////////////////    

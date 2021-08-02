@@ -24,13 +24,19 @@ io.on('connection', (socket) => {
   socket.on('join this game', (join) => {
     if (gameExists(join.gameId)) {
       const game = getGame(join.gameId)
-      if (game.tiger === '' || game .goat === '') {
+      if (game.tiger === '' || game.goat === '') {
         addPlayer(join.gameId, join.player, socket.id);
         io.to(socket.id).emit('player has joined', {player: join.player});
-        if (playersInGame(join.gameId) === 2) {
+        if (game.playerCount === 1) {
+          io.to(socket.id).emit('waiting for other player');
+        }
+        if (game.playerCount === 2) {
           const players = getGame(join.gameId);
           io.to(players.goat).emit('update board', getGame(join.gameId).board.currentBoardPosition());
-          io.to(players.tiger).emit('update board', getGame(join.gameId).board.currentBoardPosition()); 
+          io.to(players.tiger).emit('update board', getGame(join.gameId).board.currentBoardPosition());
+          
+          io.to(players.goat).emit('both players have joined');
+          io.to(players.tiger).emit('both players have joined');
           nextTurn(join.gameId);
         }
       }
@@ -59,28 +65,40 @@ io.on('connection', (socket) => {
   
 });
 
+
 server.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
 
 function nextTurn (gameId) {
   const game = getGame(gameId);
-  const turn = game.board.getTurn();
+  const checkWinner = game.board.checkWinner();
 
-  if (turn === 'goats move - Phase 1') {
-    const emptySpaces = game.board.emptySpaces();
-    io.to(game.goat).emit('place goat', {emptySpaces: emptySpaces});
+  if (checkWinner.gameOver === true) {
+    console.log('called line 78 inex.js');
+    io.to(game.goat).emit('game over', {winner: checkWinner.winner});
+    io.to(game.tiger).emit('game over', {winner: checkWinner.winner});
+  } else {
+
+    const turn = game.board.getTurn();
+    if (turn === 'goats move - Phase 1') {
+      const emptySpaces = game.board.emptySpaces();
+      io.to(game.goat).emit('place goat', {emptySpaces: emptySpaces});
+    }
+  
+    if (turn === 'tigers move') {
+    const possibleMoves = game.board.getMoves('tiger');
+    io.to(game.tiger).emit('tigers turn', {possibleMoves: possibleMoves});
+    }
+  
+    if (turn === 'goats move - Phase 2') {
+      const possibleMoves = game.board.getMoves('goat');
+      io.to(game.goat).emit('goats turn', {possibleMoves: possibleMoves});
+    }
+
   }
 
-  if (turn === 'tigers move') {
-  const possibleMoves = game.board.getMoves('tiger');
-  io.to(game.tiger).emit('tigers turn', {possibleMoves: possibleMoves});
-  }
 
-  if (turn === 'goats move - Phase 2') {
-    const possibleMoves = game.board.getMoves('goat');
-    io.to(game.goat).emit('goats turn', {possibleMoves: possibleMoves});
-  }
 }
 
 module.exports =  { io }; 
