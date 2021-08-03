@@ -6,9 +6,8 @@ const {
   home, 
   newGame, 
   join, 
-  playGame 
+  playGame,
 } = require('./controllers/controllers')
-
 
 router.get('/', home)
 

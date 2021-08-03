@@ -1,4 +1,4 @@
-const games = require('./index');
+
 
 
 ///////// GAME STATE VARIABLES /////////

@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 
 mongoose.connect(`mongodb://localhost:27017/codemocracy`, { useNewUrlParser: true, useUnifiedTopology: true });
 
+
 const Schema = mongoose.Schema;
 
 const gameSchema = new Schema({
-  gameId: Number,
-  board: [{
+  gameId: Number, 
+  game: [{
     turn: Number,
     totalGoats: Number,
     totalTigers: Number,
@@ -22,7 +23,6 @@ const gameSchema = new Schema({
       possible_moves: [Number],
       capture: [Number]
     }]
-
   }],
   playerCount: Number,
   isTaken: String,
@@ -30,7 +30,7 @@ const gameSchema = new Schema({
   goat: String,
 });
 
-const Games = mongoose.model('BaghChal', gameSchema);
+const Game = mongoose.model('BaghChal', gameSchema);
 
 
-module.exports =  Games;
+module.exports =  { Game };

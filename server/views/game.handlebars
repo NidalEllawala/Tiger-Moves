@@ -2,8 +2,19 @@
 <script src="/script.js"></script>
 
 
-<div id="test">
+<div id="game-background">
+<div id="main">
     <div id="game-board">
+    <div id="game-over" class="modal">
+    <div class="modal-background"></div>
+    <div id="dsp-winner"class="modal-content">
+    <div class="box">
+      <h3 id="winner"></h3>
+    </div>
+    </div>
+    <button id="close-me" class="modal-close is-large" aria-label="close"></button>
+    </div>
+
       <div id="movements">
       <div id="0" class="default"></div>
       <div id="1" class="default"></div>
@@ -64,5 +75,6 @@
       </div>
     </div>
 
+</div>
 </div>
 

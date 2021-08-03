@@ -1,5 +1,19 @@
-const { board } = require('./board');
+const { GameBoard } = require('./gameboard');
+const { Game } = require('./index');
 const storage = { games: {} };
+
+async function TestNewGame () {
+  const newBoard = new GameBoard();
+  let newGame = new Game({
+    playerCount: 0,
+    isTaken: 'tiger',
+    tiger: '',
+    goat: '',
+    board: newBoard
+  });
+  newGame = await newGame.save();
+  return newGame;
+}
 
 function createNewGame (id, player) {
   storage.games[id] = {
@@ -32,4 +46,4 @@ function getGame (id) {
   return storage.games[id];
 }
 
-module.exports = { getGame, addPlayer, playersInGame, gameExists, createNewGame, storage };
+module.exports = { TestNewGame };

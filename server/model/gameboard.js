@@ -4,10 +4,10 @@
 
 
 //es6 export default did not work
-class board {
+class GameBoard {
     constructor () {
         this.turn = 1;
-        this.totalGoats = 20;
+        this.totalGoats = 3;
         this.totalTigers = 4;
         this.goatsPlaced = 0;
         this.goatsCaptured = 0;
@@ -170,103 +170,105 @@ class board {
         ]
     }
 
-    currentBoardPosition () {
-        const tigers = [];
-        const goats = [];
-        for (let i = 0; i < this.board.length; i++) {
-          if (this.board[i].contains === 'tiger') {
-            tigers.push(i);
-          } else if (this.board[i].contains === 'goat') {
-            goats.push(i);
-          }
-        }
-        return {
-          tigers: tigers, 
-          goats: goats, 
-          score: { 
-            goatsRemaining: this.totalGoats - this.goatsPlaced,
-            goatsCaptured: this.goatsCaptured,
-            tigersTrapped: this.tigersTrapped,
-           } 
-          };
-      }
+  }
+  module.exports = { GameBoard };
 
-      emptySpaces () {
-        const empty = [];
-        for (let i = 0; i  < this.board.length; i++) {
-          if (this.board[i].contains === 'empty') {
-            empty.push(i);
-          }
-        }
-        return empty;
-      }
-      
-      goatPlaced (index) {
-        this.board[index].contains = 'goat';
-        this.turn += 1;
-        this.goatsPlaced += 1;
-      }
-      
-      getMoves (player) {
-        const possibleMoves = [];
-        for (let i = 0; i < this.board.length; i++) {
-          let move = {to: [], capture: []};
-          if (this.board[i].contains === player) {
-            move.from = i;
-            this.board[i].possible_moves.forEach( (el, index) => {
-              if (this.board[el].contains === 'empty') {
-                move.to.push(el);
-              } else if (player === 'tiger' && this.board[el].contains === 'goat') {
-                if (this.board[i].capture[index] != null && this.board[this.board[i].capture[index]].contains === 'empty') {
-                  move.capture.push(this.board[i].capture[index]);
-                }
-              } 
-            });
-            if (move.to.length || move.capture.length) {
-              possibleMoves.push(move);
-            }
-          }
-        }
-        if (player === 'tiger') {
-          this.tigersTrapped = this.totalTigers - possibleMoves.length;
-        }
-        return possibleMoves;
-      }
-
-      movePiece (move) {
-        this.board[move.to].contains = this.board[move.from].contains;
-        this.board[move.from].contains = 'empty';
-        this.turn += 1;
-        if (move.capture) {
-          this.board[this.board[move.from].possible_moves[this.board[move.from].capture.indexOf(parseInt(move.to))]].contains = 'empty';
-          this.goatsCaptured += 1;
+  /*
+  currentBoardPosition () {
+      const tigers = [];
+      const goats = [];
+      for (let i = 0; i < this.board.length; i++) {
+        if (this.board[i].contains === 'tiger') {
+          tigers.push(i);
+        } else if (this.board[i].contains === 'goat') {
+          goats.push(i);
         }
       }
-
-      getTurn () {
-        if (this.turn %2 != 0) {
-          if (this.goatsPlaced < this.totalGoats) {
-            return 'goats move - Phase 1';
-          } else {
-            return 'goats move - Phase 2';
-          }
-        } else {
-          return 'tigers move';
-        }
-      }
-
-      checkWinner () {
-        if (this.goatsCaptured === this.towinTiger || this.tigersTrapped === this.towinGoat) {
-          this.gameOver = true;
-          this.winner = (this.goatsCaptured === this.towinTiger) ? 'tiger' : 'goat'; 
-        }
-        return {
-          gameOver: this.gameOver, 
-          winner: this.winner
+      return {
+        tigers: tigers, 
+        goats: goats, 
+        score: { 
+          goatsRemaining: this.totalGoats - this.goatsPlaced,
+          goatsCaptured: this.goatsCaptured,
+          tigersTrapped: this.tigersTrapped,
+         } 
         };
-      }  
-}
+    }
 
+    emptySpaces () {
+      const empty = [];
+      for (let i = 0; i  < this.board.length; i++) {
+        if (this.board[i].contains === 'empty') {
+          empty.push(i);
+        }
+      }
+      return empty;
+    }
+    
+    goatPlaced (index) {
+      this.board[index].contains = 'goat';
+      this.turn += 1;
+      this.goatsPlaced += 1;
+    }
+    
+    getMoves (player) {
+      const possibleMoves = [];
+      for (let i = 0; i < this.board.length; i++) {
+        let move = {to: [], capture: []};
+        if (this.board[i].contains === player) {
+          move.from = i;
+          this.board[i].possible_moves.forEach( (el, index) => {
+            if (this.board[el].contains === 'empty') {
+              move.to.push(el);
+            } else if (player === 'tiger' && this.board[el].contains === 'goat') {
+              if (this.board[i].capture[index] != null && this.board[this.board[i].capture[index]].contains === 'empty') {
+                move.capture.push(this.board[i].capture[index]);
+              }
+            } 
+          });
+          if (move.to.length || move.capture.length) {
+            possibleMoves.push(move);
+          }
+        }
+      }
+      if (player === 'tiger') {
+        this.tigersTrapped = this.totalTigers - possibleMoves.length;
+      }
+      return possibleMoves;
+    }
 
+    movePiece (move) {
+      this.board[move.to].contains = this.board[move.from].contains;
+      this.board[move.from].contains = 'empty';
+      this.turn += 1;
+      if (move.capture) {
+        this.board[this.board[move.from].possible_moves[this.board[move.from].capture.indexOf(parseInt(move.to))]].contains = 'empty';
+        this.goatsCaptured += 1;
+      }
+    }
 
-module.exports = { board };
+    getTurn () {
+      if (this.turn %2 != 0) {
+        if (this.goatsPlaced < this.totalGoats) {
+          return 'goats move - Phase 1';
+        } else {
+          return 'goats move - Phase 2';
+        }
+      } else {
+        return 'tigers move';
+      }
+    }
+
+    checkWinner () {
+      if (this.goatsCaptured === this.towinTiger || this.tigersTrapped === this.towinGoat) {
+        console.log('called line 264 board.js')
+        this.gameOver = true;
+        this.winner = (this.goatsCaptured === this.towinTiger) ? 'tiger' : 'goat'; 
+      }
+      return {
+        gameOver: this.gameOver, 
+        winner: this.winner
+      };
+    }  
+
+    */
