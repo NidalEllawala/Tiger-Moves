@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-
-mongoose.connect(`mongodb://localhost:27017/codemocracy`, { useNewUrlParser: true, useUnifiedTopology: true});
-
+//console.log(`line 3 index.js ${process.env.DB_NAME}`);
+//env variables just would not work
+mongoose.connect(`mongodb://localhost:27107/char-server`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const Schema = mongoose.Schema;
 

@@ -2,9 +2,8 @@ const { GameBoard } = require('./gameboard');
 const { Game } = require('./index');
 const storage = { games: {} };
 
-async function createNewGame (player) {
+async function createNewGameDB (player) {
   const newBoard = new GameBoard();
-  console.log(newBoard);
   let newGame = new Game({
     playerCount: 0,
     isTaken: player,
@@ -39,4 +38,4 @@ function getGame (id) {
   return storage.games[id];
 }
 
-module.exports = { createNewGame };
+module.exports = { createNewGameDB };
