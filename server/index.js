@@ -33,8 +33,8 @@ io.on('connection', (socket) => {
         }
         if (game.playerCount === 2) {
           const players = getGame(join.gameId);
-          io.to(players.goat).to(players.tiger).emit('update board', getGame(join.gameId).board.currentBoardPosition());
           io.to(players.goat).to(players.tiger).emit('both players have joined');
+          io.to(players.goat).to(players.tiger).emit('update board', getGame(join.gameId).board.currentBoardPosition());
           nextTurn(join.gameId);
         }
       }
