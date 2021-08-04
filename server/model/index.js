@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(`mongodb://localhost:27017/codemocracy`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 const Schema = mongoose.Schema;
