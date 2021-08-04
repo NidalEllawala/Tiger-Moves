@@ -2,28 +2,21 @@ const { GameBoard } = require('./gameboard');
 const { Game } = require('./index');
 const storage = { games: {} };
 
-async function TestNewGame () {
+async function createNewGame (player) {
   const newBoard = new GameBoard();
+  console.log(newBoard);
   let newGame = new Game({
     playerCount: 0,
-    isTaken: 'tiger',
+    isTaken: player,
     tiger: '',
     goat: '',
-    board: newBoard
+    game: newBoard
   });
   newGame = await newGame.save();
   return newGame;
 }
 
-function createNewGame (id, player) {
-  storage.games[id] = {
-    board: new board(),
-    playerCount: 0,
-    isTaken: player,
-    tiger: '',
-    goat: ''
-  }
-}
+
 
 function gameExists (id) {
   if (storage.games[id] != undefined) {
@@ -46,4 +39,4 @@ function getGame (id) {
   return storage.games[id];
 }
 
-module.exports = { TestNewGame };
+module.exports = { createNewGame };
