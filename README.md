@@ -11,14 +11,6 @@ The game is played on a 5×5 point grid, like alquerque. Pieces are positioned a
 - The scoreboard will keep track of the pieces and includes a turn indicator to let you know when the opponent has moved a piece
 - A helper feature highlights all possibl moves when you click on a piece 
 
-<p float=left>
-<img src="https://i.imgur.com/UmCjpXZ.png" width="400" height="400">
-<img src="https://i.imgur.com/dja4Kc3.png" width="400" height="400">
-<\p>
-<p float=left>
-<img src="https://i.imgur.com/OLf02Cp.png" width="400" height="400">
-<img src="https://i.imgur.com/sFRWoaW.png" width="400" height="400">
- </p>
 ![Image of startgame](https://i.imgur.com/UmCjpXZ.png)
 ![Image of joingame](https://i.imgur.com/dja4Kc3.png)
 ![Image of gamescreen](https://i.imgur.com/OLf02Cp.png)
