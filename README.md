@@ -12,11 +12,11 @@ After this you can run the index.js file to launch the game
 
 # Tech Stack
 - currently refactoring front-end with React.js
-Node.js
-Express.js
-Handlebars
-MongoDB
-Mongoose
-Socket.io
+- Node.js
+- Express.js
+- Handlebars
+- MongoDB
+- Mongoose
+- Socket.io
 
 # Contributors
