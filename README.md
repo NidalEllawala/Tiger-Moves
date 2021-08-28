@@ -1,5 +1,5 @@
 # Tiger-Moves
-2 player board game originaly from Nepal called Bagh-Chal, played on a 5x5 grid, similar to a chess board. The app includes an assist feature that highlights all possible moves for a iece when selected, to help new players learn the rules. 
+2 player board game originaly from Nepal called Bagh-Chal, played on a 5x5 grid, similar to a chess board. The app includes an assist feature that highlights all possible moves for a piece when selected, to help new players learn the rules. 
 
 ![Image of startgame](https://i.imgur.com/UmCjpXZ.png)
 ![Image of joingame](https://i.imgur.com/dja4Kc3.png)
