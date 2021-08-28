@@ -4,6 +4,7 @@
 ![Image of startgame](https://i.imgur.com/UmCjpXZ.png)
 ![Image of joingame](https://i.imgur.com/dja4Kc3.png)
 ![Image of gamescreen](https://i.imgur.com/OLf02Cp.png)
+![Image of gamescreen](https://i.imgur.com/sFRWoaW.png)
 
 
 # Getting started
