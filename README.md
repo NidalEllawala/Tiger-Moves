@@ -11,9 +11,10 @@ Clone this repo and open it using your favorite code editor. Once opened navigat
 After this you can run the index.js file to launch the game 
 
 # Tech Stack
+currently refactoring front-end with React.js
 Node.js
 Express.js
-React.js
+Handlebars
 MongoDB
 Mongoose
 Socket.io
