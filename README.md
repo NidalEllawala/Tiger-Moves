@@ -21,7 +21,7 @@ Tiger-Moves will be deployed soon. Until then you can run the app to connect wit
 
 In order to run this app you will need to have [MongoDB](https://www.mongodb.com/) installed and running. 
 
-1. Clone this repo - `git clone https://github.com/NidalEllawala/Tiger-Moves`
+1. Clone this repo - `git clone https://github.com/NidalEllawala/Tiger-Moves` and open it with your favorite code editer
 2. Change directory to the server folder `cd server`
 3. run `npm i` to install the necessary dependencies
 4. create a .env file in the root folder following the .env.example file provided
