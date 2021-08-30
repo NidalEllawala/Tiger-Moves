@@ -3,7 +3,11 @@
 Bagh Chal or Tiger Moves is a 2 player board game originaly from Nepal. 
 
 ### Rules
-The game is played on a 5×5 point grid with Pieces positioned at the intersection of the lines and not inside the areas delimited by them. Directions of valid movement between these points are connected by lines. The game play takes place in two phases. In the first phase the goats are placed on the board while the tigers are moved. In the second phase both the goats and the tigers are moved. For the tigers, the objective is to "capture" five goats to win. Capturing is performed by jumping over the goats. The goats win by blocking all the tigers' legal moves.
+The game is played on a 5×5 point grid with pieces positioned at the intersection of the lines and not inside the areas delimited by them. 
+
+Directions of valid movement between these points are connected by lines. The game play takes place in two phases. In the first phase the goats are placed on the board while the tigers are moved. In the second phase both the goats and the tigers are moved. 
+
+For the tigers, the objective is to "capture" five goats to win. Capturing is performed by jumping over the goats. The goats win by blocking all the tigers' legal moves.
 
 ### How to use
 - A unique gameId is generated when you create a new game
